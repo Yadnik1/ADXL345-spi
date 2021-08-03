@@ -9,9 +9,9 @@ REG_DATAX0 = 0x32
 # Other constants
 DEVID = 0xE5  # 0xE5-ADXL345 device ID
 SENSITIVITY_2G = 1.0/256    # (g/LSB)
-EARTH_GRAVITY = 9.80665     #     acceleration [m / (s * s)]
+EARTH_GRAVITY = 9.80665     # acceleration [m / (s * s)]
 
-# Specify the PIO17 port to the program control slave selection CS
+# Specify port A and pin21 to the program control slave selection CS
 cs = Pin(("GPIO_0", 21), Pin.OUT)
 
 # Initialize SPI
@@ -21,7 +21,7 @@ spi.init(baudrate=500000, polarity=1, phase=1, bits=8, firstbit=SPI.MSB)
 #Function definition
 def reg_write(spi, cs, reg, data):
     """
-         Write bytes to the specified register
+    Write bytes to the specified register
     """
     msg = bytearray()
     msg.append(0x00|reg)
@@ -32,7 +32,7 @@ def reg_write(spi, cs, reg, data):
     
 def reg_read(spi, cs, reg, nbytes=1):
     """
-         Read bytes from the specified register; if NBYTES> 1 is read from a continuous register.
+    Read bytes from the specified register; if NBYTES> 1 is read from a continuous register.
     """
     if nbytes < 1:
         return bytearray()
